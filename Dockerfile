@@ -9,7 +9,7 @@ RUN apt update && apt install -y build-essential python bash git curl software-p
 RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
-RUN adduser user -u 1000 -g 0 -r -m -d /home/user/ -c "Default Application User" -l
+RUN adduser --uid 1000 --gid 0 --home /home/user/ --shell /bin/bash user
 RUN echo "user ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user
 RUN echo "user ALL=(root) NOPASSWD:ALL" > /etc/sudoers
 RUN chmod 0440 /etc/sudoers.d/user
