@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk update && apk add nodejs npm make gcc python g++
+RUN apk update && apk add nodejs npm make gcc python g++ bash
 
 RUN npm i npm@latest -g
 
@@ -15,6 +15,9 @@ RUN npm i npm@latest -g
 
 # https://github.com/nodejs/node-gyp/issues/1236#issuecomment-327668264
 RUN npm install -g wetty --unsafe
+RUN adduser -D -h /home/term -s /bin/bash term && echo "term:term" | chpasswd
+
+WORKDIR /home/term
 
 EXPOSE 8080
 
