@@ -4,7 +4,7 @@ ENV USERNAME ""
 ENV PASSWORD ""
 ENV HOME "/home/user/"
 
-RUN apt update && apt install -y build-essential python bash git wget curl software-properties-common libnss-wrapper gettext-base sudo unzip wget
+RUN apt update && apt install -y build-essential python bash git wget curl software-properties-common libnss-wrapper gettext-base sudo unzip wget openssh
 
 RUN wget -qO- https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN apt-get install -y nodejs
@@ -25,6 +25,10 @@ RUN npm i npm@latest -g
 
 # WORKDIR /home/wetty/bin
 
+RUN sed -i "s/#PasswordAuthentication/PasswordAuthentication/g"
+RUN sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g"
+RUN sed -i "s/#PermitEmptyPasswords/PermitEmptyPasswords/g"
+RUN sed -i "s/PermitEmptyPasswords no/PermitEmptyPasswords yes/g"
 
 RUN mkdir -p /workspace
 RUN chown user:root /workspace
