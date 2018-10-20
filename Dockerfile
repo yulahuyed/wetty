@@ -9,7 +9,7 @@ RUN apt update && apt install -y build-essential python bash git curl software-p
 RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
-RUN adduser --uid 1000 --gid 0 --home /home/user/ --shell /bin/bash user
+RUN adduser --uid 1000 --gid 0 --home /home/user/ --shell /bin/bash --disabled-password user
 RUN echo "user ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user
 RUN echo "user ALL=(root) NOPASSWD:ALL" > /etc/sudoers
 RUN chmod 0440 /etc/sudoers.d/user
@@ -25,8 +25,7 @@ RUN npm i npm@latest -g
 
 # WORKDIR /home/wetty/bin
 
-# https://github.com/nodejs/node-gyp/issues/1236#issuecomment-327668264
-RUN npm install -g wetty --unsafe
+RUN npm install -g wetty
 
 RUN mkdir -p /workspace
 RUN chown user:root /workspace
