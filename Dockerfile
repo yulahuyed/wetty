@@ -4,7 +4,7 @@ ENV USERNAME ""
 ENV PASSWORD ""
 ENV HOME "/home/user/"
 
-RUN apt update && apt install build-essential python bash git curl python-software-properties nss_wrapper gettext-base sudo unzip wget
+RUN apt update && apt install build-essential python bash git curl software-properties-common libnss-wrapper gettext-base sudo unzip wget
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 RUN apt-get install nodejs
