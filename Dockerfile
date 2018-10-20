@@ -1,6 +1,18 @@
-FROM alpine:latest
+FROM ubuntu:latest
 
-RUN apk update && apk add nodejs npm make gcc python g++ bash openssh
+ENV USERNAME ""
+ENV PASSWORD ""
+ENV HOME "/home/user/"
+
+RUN apt update && apt install build-essential python bash git curl python-software-properties nss_wrapper gettext-base sudo unzip wget
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+RUN apt-get install nodejs
+
+RUN adduser user -u 1000 -g 0 -r -m -d /home/user/ -c "Default Application User" -l
+RUN echo "user ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user
+RUN echo "user ALL=(root) NOPASSWD:ALL" > /etc/sudoers
+RUN chmod 0440 /etc/sudoers.d/user
 
 RUN npm i npm@latest -g
 
@@ -15,11 +27,19 @@ RUN npm i npm@latest -g
 
 # https://github.com/nodejs/node-gyp/issues/1236#issuecomment-327668264
 RUN npm install -g wetty --unsafe
-RUN adduser -D -h /home/term -s /bin/bash term && echo "term:term" | chpasswd
 
-WORKDIR /home/term
+RUN mkdir -p /workspace
+RUN chown user:root /workspace
+RUN chmod -R g+rw /home/user
+
+COPY run.sh /tmp/
+ADD passwd_template /tmp/
+RUN chmod +x /tmp/run.sh
+
+WORKDIR /workspace
 
 EXPOSE 8080
 
-CMD wetty -p 8080
+USER 1000
+CMD ["/tmp/run.sh"]
 # CMD node index.js -p 8080
