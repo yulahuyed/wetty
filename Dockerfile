@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-RUN apk update && apk add nodejs npm make gcc python g++ bash
+RUN apk update && apk add nodejs npm make gcc python g++ bash openssh
 
 RUN npm i npm@latest -g
 
