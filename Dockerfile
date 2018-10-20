@@ -4,10 +4,10 @@ ENV USERNAME ""
 ENV PASSWORD ""
 ENV HOME "/home/user/"
 
-RUN apt update && apt install build-essential python bash git curl software-properties-common libnss-wrapper gettext-base sudo unzip wget
+RUN apt update && apt install -y build-essential python bash git curl software-properties-common libnss-wrapper gettext-base sudo unzip wget
 
 RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-RUN apt-get install nodejs
+RUN apt-get install -y nodejs
 
 RUN adduser user -u 1000 -g 0 -r -m -d /home/user/ -c "Default Application User" -l
 RUN echo "user ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user
