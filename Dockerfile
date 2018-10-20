@@ -29,6 +29,8 @@ RUN sed -i "s/#PasswordAuthentication/PasswordAuthentication/g" /etc/ssh/sshd_co
 RUN sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
 RUN sed -i "s/#PermitEmptyPasswords/PermitEmptyPasswords/g" /etc/ssh/sshd_config
 RUN sed -i "s/PermitEmptyPasswords no/PermitEmptyPasswords yes/g" /etc/ssh/sshd_config
+RUN chmod -R 777 /run
+RUN ssh-keygen -A
 
 RUN mkdir -p /workspace
 RUN chown user:root /workspace
