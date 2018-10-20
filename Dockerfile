@@ -30,11 +30,7 @@ RUN mkdir -p /workspace
 RUN chown user:root /workspace
 RUN chmod -R g+rw /home/user
 
-RUN mkdir -p /home/node/.npm-global
-RUN chmod -R 777 /home/node
-ENV PATH=/home/node/.npm-global/bin:$PATH
-ENV NPM_CONFIG_PREFIX=/home/node/.npm-global
-RUN npm install -g wetty
+RUN npm install -g wetty --unsafe-perm=true --allow-root
 
 COPY run.sh /tmp/
 ADD passwd_template /tmp/
