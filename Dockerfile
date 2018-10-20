@@ -4,9 +4,9 @@ ENV USERNAME ""
 ENV PASSWORD ""
 ENV HOME "/home/user/"
 
-RUN apt update && apt install -y build-essential python bash git curl software-properties-common libnss-wrapper gettext-base sudo unzip wget
+RUN apt update && apt install -y build-essential python bash git wget curl software-properties-common libnss-wrapper gettext-base sudo unzip wget
 
-RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+RUN wget -qO- https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
 RUN adduser --uid 1000 --gid 0 --home /home/user/ --shell /bin/bash --disabled-password user
