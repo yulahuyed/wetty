@@ -25,10 +25,10 @@ RUN npm i npm@latest -g
 
 # WORKDIR /home/wetty/bin
 
-RUN sed -i "s/#PasswordAuthentication/PasswordAuthentication/g"
-RUN sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g"
-RUN sed -i "s/#PermitEmptyPasswords/PermitEmptyPasswords/g"
-RUN sed -i "s/PermitEmptyPasswords no/PermitEmptyPasswords yes/g"
+RUN sed -i "s/#PasswordAuthentication/PasswordAuthentication/g" /etc/ssh/sshd_config
+RUN sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+RUN sed -i "s/#PermitEmptyPasswords/PermitEmptyPasswords/g" /etc/ssh/sshd_config
+RUN sed -i "s/PermitEmptyPasswords no/PermitEmptyPasswords yes/g" /etc/ssh/sshd_config
 
 RUN mkdir -p /workspace
 RUN chown user:root /workspace
