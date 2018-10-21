@@ -8,4 +8,4 @@ export NSS_WRAPPER_PASSWD=/tmp/passwd
 export NSS_WRAPPER_GROUP=/etc/group
 
 nohup /usr/sbin/sshd -D > ssh.log 2>&1 &
-wetty -p 8080 --sshport $SSHPORT
+wetty -p 8080 --sshhost 127.0.0.1 --sshport $SSHPORT
