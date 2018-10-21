@@ -29,10 +29,6 @@ RUN npm i npm@latest -g
 
 # WORKDIR /home/wetty/bin
 
-RUN sed -i "s/#PasswordAuthentication/PasswordAuthentication/g" /etc/ssh/sshd_config
-RUN sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
-RUN sed -i "s/#PermitEmptyPasswords/PermitEmptyPasswords/g" /etc/ssh/sshd_config
-RUN sed -i "s/PermitEmptyPasswords no/PermitEmptyPasswords yes/g" /etc/ssh/sshd_config
 RUN sed -i "s/#Port/Port/g" /etc/ssh/sshd_config
 RUN sed -i "s/Port 22/Port $SSHPORT/g" /etc/ssh/sshd_config
 RUN chmod -R 777 /etc/ssh
