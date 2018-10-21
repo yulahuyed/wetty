@@ -14,8 +14,8 @@ RUN apt-get install -y nodejs
 
 RUN adduser --uid 1000 --gid 0 --home /home/user/ --shell /bin/bash user
 RUN echo "user:$SSHPASS" | chpasswd
-RUN echo "user ALL=(ALL:ALL) ALL" > /etc/sudoers.d/user
-RUN echo "user ALL=(ALL:ALL) ALL" > /etc/sudoers
+RUN echo "user ALL=(ALL:ALL) ALL" >> /etc/sudoers.d/user
+RUN echo "user ALL=(ALL:ALL) ALL" >> /etc/sudoers
 RUN chmod 0440 /etc/sudoers.d/user
 
 RUN npm i npm@latest -g
