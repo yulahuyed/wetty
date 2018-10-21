@@ -3,6 +3,8 @@ FROM ubuntu:latest
 ENV USERNAME ""
 ENV PASSWORD ""
 ENV HOME "/home/user/"
+ENV SSHHOST "localhost"
+ENV SSHPORT "2222"
 
 RUN apt update && apt install -y build-essential python bash git wget curl software-properties-common libnss-wrapper gettext-base sudo unzip wget ssh
 
@@ -29,6 +31,8 @@ RUN sed -i "s/#PasswordAuthentication/PasswordAuthentication/g" /etc/ssh/sshd_co
 RUN sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
 RUN sed -i "s/#PermitEmptyPasswords/PermitEmptyPasswords/g" /etc/ssh/sshd_config
 RUN sed -i "s/PermitEmptyPasswords no/PermitEmptyPasswords yes/g" /etc/ssh/sshd_config
+RUN sed -i "s/#Port/Port/g" /etc/ssh/sshd_config
+RUN sed -i "s/Port 22/Port 2222/g" /etc/ssh/sshd_config
 RUN chmod -R 777 /run
 RUN ssh-keygen -A
 
