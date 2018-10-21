@@ -33,7 +33,7 @@ RUN sed -i "s/#PermitEmptyPasswords/PermitEmptyPasswords/g" /etc/ssh/sshd_config
 RUN sed -i "s/PermitEmptyPasswords no/PermitEmptyPasswords yes/g" /etc/ssh/sshd_config
 RUN sed -i "s/#Port/Port/g" /etc/ssh/sshd_config
 RUN sed -i "s/Port 22/Port $SSHPORT/g" /etc/ssh/sshd_config
-RUN chmod -R /etc/ssh
+RUN chmod -R 777 /etc/ssh
 RUN chmod -R 777 /run
 RUN ssh-keygen -A
 
