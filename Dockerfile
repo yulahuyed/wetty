@@ -36,9 +36,9 @@ RUN sed -i "s/Port 22/Port $SSHPORT/g" /etc/ssh/sshd_config
 RUN chmod -R 777 /run
 RUN ssh-keygen -A
 
-RUN mkdir -p /workspace
-RUN chown user:root /workspace
-RUN chmod -R g+rw /home/user
+RUN mkdir -p /workspace/config
+RUN chmod -R 777 /workspace
+RUN chmod -R 777 /home/user
 
 RUN npm install -g wetty --unsafe-perm=true --allow-root
 
