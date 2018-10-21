@@ -6,7 +6,7 @@ ENV HOME "/home/user/"
 ENV SSHHOST "localhost"
 ENV SSHPORT "2222"
 
-RUN apt update && apt install -y build-essential python bash git wget curl software-properties-common libnss-wrapper gettext-base sudo unzip wget ssh
+RUN apt update && apt install -y build-essential python bash git net-tools curl software-properties-common libnss-wrapper gettext-base sudo unzip wget ssh
 
 RUN wget -qO- https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN apt-get install -y nodejs
@@ -32,7 +32,7 @@ RUN sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/s
 RUN sed -i "s/#PermitEmptyPasswords/PermitEmptyPasswords/g" /etc/ssh/sshd_config
 RUN sed -i "s/PermitEmptyPasswords no/PermitEmptyPasswords yes/g" /etc/ssh/sshd_config
 RUN sed -i "s/#Port/Port/g" /etc/ssh/sshd_config
-RUN sed -i "s/Port 22/Port 2222/g" /etc/ssh/sshd_config
+RUN sed -i "s/Port 22/Port $SSHPORT/g" /etc/ssh/sshd_config
 RUN chmod -R 777 /run
 RUN ssh-keygen -A
 
