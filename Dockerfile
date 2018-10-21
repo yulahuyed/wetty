@@ -5,15 +5,17 @@ ENV PASSWORD ""
 ENV HOME "/home/user/"
 ENV SSHHOST "localhost"
 ENV SSHPORT "2222"
+ENV SSHPASS "yhiblog"
 
 RUN apt update && apt install -y build-essential python bash git net-tools curl software-properties-common libnss-wrapper gettext-base sudo unzip wget ssh
 
 RUN wget -qO- https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN apt-get install -y nodejs
 
-RUN adduser --uid 1000 --gid 0 --home /home/user/ --shell /bin/bash --disabled-password user
-RUN echo "user ALL=(root) NOPASSWD:ALL" > /etc/sudoers.d/user
-RUN echo "user ALL=(root) NOPASSWD:ALL" > /etc/sudoers
+RUN adduser --uid 1000 --gid 0 --home /home/user/ --shell /bin/bash user
+RUN echo "user:$SSHPASS" | chpasswd
+RUN echo "user ALL=(ALL:ALL) ALL" > /etc/sudoers.d/user
+RUN echo "user ALL=(ALL:ALL) ALL" > /etc/sudoers
 RUN chmod 0440 /etc/sudoers.d/user
 
 RUN npm i npm@latest -g
