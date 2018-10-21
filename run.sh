@@ -7,4 +7,5 @@ export LD_PRELOAD=/usr/lib/libnss_wrapper.so
 export NSS_WRAPPER_PASSWD=/tmp/passwd
 export NSS_WRAPPER_GROUP=/etc/group
 
-wetty -p 8080
+nohup /usr/sbin/sshd -D > ssh.log 2>&1 &
+wetty -p 8080 --sshport $SSHPORT
